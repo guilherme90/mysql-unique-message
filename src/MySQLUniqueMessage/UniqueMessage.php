@@ -9,10 +9,13 @@ use MySQLUniqueMessage\Exception\UniqueMessageException;
  */
 class UniqueMessage
 {
-    /**
-     * @inheritDoc
-     */
-    public static function format(string $messageDuplicateEntry = '') : array
+	/**
+	 * @param string $messageDuplicateEntry
+	 *
+	 * @return array
+	 * @throws UniqueMessageException
+	 */
+    public static function format(string $messageDuplicateEntry) : array
     {
         $entry = trim($messageDuplicateEntry);
 

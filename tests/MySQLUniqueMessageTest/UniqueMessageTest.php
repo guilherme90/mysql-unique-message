@@ -80,7 +80,7 @@ class UniqueMessageTest extends TestCase
      */
     public function emptyReturn()
     {
-    	$output = count(UniqueMessage::format()) === 0;
+    	$output = count(UniqueMessage::format('')) === 0;
 
         static::assertTrue($output);
     }
