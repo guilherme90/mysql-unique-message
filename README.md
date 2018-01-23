@@ -15,17 +15,17 @@ $ composer cs
 $ composer csfix
 ```
 
-### Usage
+### How to use
 ```php
 <?php
 
 use \MySQLUniqueMessage\UniqueMessage;
 
-// This message will return in your mysql
+// This message will return in your mysql using try / catch block
 $message = 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry \'user@provider.com\' for key \'email\'';
 $output = UniqueMessage::format($message); 
 
-// dump
+// dump from $output
 return [
 	'name' => 'email',
 	'value' => 'user@provider.com',
