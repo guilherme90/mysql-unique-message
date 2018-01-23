@@ -1,0 +1,40 @@
+{
+  "name": "guilherme90/mysql-unique-message",
+  "description": "A simple library for formatting the duplicate message in MySQL",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Guilherme Nogueira",
+      "email": "guilhermenogueira@univicosa.com.br"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "^6.4",
+    "squizlabs/php_codesniffer": "^2.9"
+  },
+  "autoload": {
+    "psr-4": {
+      "MySQLUniqueMessage\\": "src/MySQLUniqueMessage/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MySQLUniqueMessageTest\\": "tests/MySQLUniqueMessageTest/"
+    }
+  },
+  "scripts": {
+    "check": [
+      "@cs",
+      "@cs-fix",
+      "@test",
+      "@dump"
+    ],
+    "cs": "phpcs --standard=phpcs.xml",
+    "csfix": "phpcbf",
+    "test": "phpunit",
+    "dump": "composer dump-autoload --optimize"
+  }
+}
