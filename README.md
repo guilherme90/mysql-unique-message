@@ -27,7 +27,7 @@ $output = UniqueMessage::format($message);
 ```
 
 Dump from `$output`
-```
+```php
 [
 	'name' => 'email',
 	'value' => 'user@provider.com',
