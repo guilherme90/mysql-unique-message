@@ -2,6 +2,8 @@
 
 A simple library for formatting the duplicate message in MySQL
 
+- PHP >= 7
+
 ### Tests
 ```bash
 $ composer test
