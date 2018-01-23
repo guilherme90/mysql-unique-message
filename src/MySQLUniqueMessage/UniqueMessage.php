@@ -12,7 +12,7 @@ class UniqueMessage
     /**
      * @inheritDoc
      */
-    public static function format(string $messageDuplicateEntry = '') : string
+    public static function format(string $messageDuplicateEntry = '') : array
     {
         $entry = trim($messageDuplicateEntry);
 
@@ -23,9 +23,13 @@ class UniqueMessage
                 throw UniqueMessageException::invalidMessageFormat();
             }
 
-            return sprintf('The %s \'%s\' is already registered.', $matches[4], $matches[1]);
+            return [
+            	'fieldName' => $matches[4],
+	            'value' => $matches[1],
+	            'message' => sprintf('The %s \'%s\' is already registered.', $matches[4], $matches[1])
+            ];
         }
 
-        return '';
+        return [];
     }
 }

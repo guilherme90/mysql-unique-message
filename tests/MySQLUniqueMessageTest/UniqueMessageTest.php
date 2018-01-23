@@ -10,19 +10,58 @@ use PHPUnit\Framework\TestCase;
  */
 class UniqueMessageTest extends TestCase
 {
+	protected $output = [];
+
+	public function setUp()
+	{
+		parent::setUp();
+
+		$this->output = UniqueMessage::format($this->mysqlErrorMessage());
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function mysqlErrorMessage() : string
+	{
+		return 'SQLSTATE[23000]: Integrity constraint violation: ' .
+			'1062 Duplicate entry \'user@provider.com\' for key \'email\'';
+	}
+
+	/**
+	 * @test
+	 */
+	public function checkArrayKeys()
+	{
+		static::assertArrayHasKey('fieldName', $this->output);
+		static::assertArrayHasKey('value', $this->output);
+		static::assertArrayHasKey('message', $this->output);
+	}
+
+	/**
+	 * @test
+	 */
+	public function checkFieldName()
+	{
+		static::assertSame('email', $this->output['fieldName']);
+	}
+
+	/**
+	 * @test
+	 */
+	public function checkValue()
+	{
+		static::assertSame('user@provider.com', $this->output['value']);
+	}
+
     /**
      * @test
      */
-    public function displayingErrorMessage()
+    public function checkMessageFormat()
     {
-        $entry = UniqueMessage::format(
-            'SQLSTATE[23000]: Integrity constraint violation: ' .
-            '1062 Duplicate entry \'guilhermenogueira90@gmail.com\' for key \'email\''
-        );
-
         static::assertSame(
-            sprintf('The %s \'%s\' is already registered.', 'email', 'guilhermenogueira90@gmail.com'),
-            $entry
+            sprintf('The %s \'%s\' is already registered.', 'email', 'user@provider.com'),
+	        $this->output['message']
         );
     }
 
@@ -39,8 +78,10 @@ class UniqueMessageTest extends TestCase
     /**
      * @test
      */
-    public function emptyMessage()
+    public function emptyReturn()
     {
-        static::assertSame(UniqueMessage::format(), '');
+    	$output = count(UniqueMessage::format()) === 0;
+
+        static::assertTrue($output);
     }
 }
