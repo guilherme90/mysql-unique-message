@@ -24,9 +24,11 @@ use \MySQLUniqueMessage\UniqueMessage;
 // This message will return in your mysql using try / catch block
 $message = 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry \'user@provider.com\' for key \'email\'';
 $output = UniqueMessage::format($message); 
+```
 
-// dump from $output
-return [
+Dump from `$output`
+```
+[
 	'name' => 'email',
 	'value' => 'user@provider.com',
 	'message' => 'The email \'user@provider.com\' is already registered.'
